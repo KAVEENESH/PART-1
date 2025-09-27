@@ -1,31 +1,59 @@
-function getHistory() {
-    return document.getElementById("history-value").innerText;
+let balance = 1000; // Starting balance
+let currentInput = "";
+
+const output = document.getElementById("output");
+const history = document.getElementById("history-value");
+
+function updateOutput() {
+    output.textContent = currentInput || "0";
 }
-function printHistory(num) {
-    document.getElementById("history-value").innerText = num;
-}
-function getOutput() {
-    return document.getElementById("output-value").innerText;
-}
-function printOutput(num) {
-    if (num == "") {
-        return document.getElementById("output-value").innerText = num;
+
+// Handle number button clicks
+document.querySelectorAll(".number").forEach(btn => {
+    btn.addEventListener("click", () => {
+        currentInput += btn.id;
+        updateOutput();
+    });
+});
+
+// Deposit money
+document.getElementById("deposit").addEventListener("click", () => {
+    let amount = parseInt(currentInput);
+    if (!isNaN(amount) && amount > 0) {
+        balance += amount;
+        history.textContent = `Deposited ₹${amount}`;
+        currentInput = "";
+        updateOutput();
     }
-    else {
-        return document.getElementById("output-value").innerText = getFormattedNumber(num);
+});
+
+// Withdraw money
+document.getElementById("withdraw").addEventListener("click", () => {
+    let amount = parseInt(currentInput);
+    if (!isNaN(amount) && amount > 0) {
+        if (amount <= balance) {
+            balance -= amount;
+            history.textContent = `Withdrew ₹${amount}`;
+        } else {
+            history.textContent = `❌ Not enough balance!`;
+        }
+        currentInput = "";
+        updateOutput();
     }
-}
-function getFormattedNumber(num) {
-    if (num == "-") {
-        return "";
-    }
-    var n = Number(num)
-    var value = n.toPrecision("en")
-    return value;
-}
-function reverseNumberFormat(num) {
-    return Number(num.replace(/,/g, ''))
-}
-var operator = document.getElementsByClassName("operator");
-for (var i = 0; i < operator; i++)
-    operator[i].addEventListerner('click', )
+});
+
+// Show balance
+document.getElementById("balance").addEventListener("click", () => {
+    history.textContent = `Current Balance: ₹${balance}`;
+});
+
+// Reset account
+document.getElementById("reset").addEventListener("click", () => {
+    balance = 1000;
+    currentInput = "";
+    history.textContent = "🔄 Balance reset to ₹1000";
+    updateOutput();
+});
+
+// Initialize display
+updateOutput();

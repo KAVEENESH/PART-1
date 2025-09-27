@@ -11,7 +11,7 @@ body {
 
 #calculator {
     width: 300px;
-    height: 590px;
+    height: 690px;
     margin: 0 auto;
     background-color: lightskyblue;
     top: 20px;
@@ -85,4 +85,26 @@ h1{
     padding-left:60px;
     font-size: 40px;
     font-family: monospace;
+}
+*{
+    font-family: monospace;
+}
+#withdraw{
+background-color: rgb(255, 194, 71);
+
+border-radius: 10px;
+}
+#balance{
+background-color: rgb(218, 255, 71);
+border-radius: 10px;
+}
+#reset{
+background-color: rgb(71, 255, 111);
+border-radius: 10px;
+padding-right: 90px;
+padding-left: 90px;
+}
+#deposit{
+background-color: tomato;
+border-radius: 10px;
 }
